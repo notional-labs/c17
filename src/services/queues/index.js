@@ -12,7 +12,6 @@ function spliceIntoChunks(originalArray, maxChunkSize) {
     return chunks
 }
 
-
 function splitBlocksIntoQueues(blockNumbers, numberOfQueues) {
     const blockQueues = {}
     const avgDataLength = blockNumbers.length / numberOfQueues

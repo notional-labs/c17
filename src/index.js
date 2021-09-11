@@ -11,4 +11,5 @@ buildAddressBalanceList({
     logger: console,
     writers,
     getContract: getTokenContract,
-    proccessBlockSequence:processBlockSequence});
+    proccessBlockSequence:processBlockSequence
+});

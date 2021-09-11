@@ -49,6 +49,7 @@ async function buildAddressBalanceList({
   // 1. Load known accounts.
   const initialKnownAccounts = config.accounts;
   const bannedAccounts = config.banned;
+
   // 2. Scan for token transactions for the contract.
   const tokenUsingAccounts = await collectTokenTransactors(
     config,
@@ -58,15 +59,18 @@ async function buildAddressBalanceList({
   );
   // 3. Write discovered accounts who interacted with token contract to storage.
   await writers.writeAccounts(tokenUsingAccounts);
+
   // 4. Create a union of pre-known accounts and the discovered accounts.
   const allKnownAccounts = union(
     new Set(initialKnownAccounts),
     tokenUsingAccounts
   );
+
   // 5. Filter out banned accounts
   const validAccounts = new Set(
     [...allKnownAccounts].filter((account) => !bannedAccounts.has(account))
   );
+
   // 6. Check balances at end block for every known account.
   const tokenContractAtEndBlock = getContract(
     config.abi,
@@ -74,6 +78,7 @@ async function buildAddressBalanceList({
     config.clients[0],
     config.blockStop
   );
+
   // 7. Collect token contract balances at the configured endblock.
   const balances = await getBalancesOfAccountSet(
     tokenContractAtEndBlock,
@@ -82,6 +87,7 @@ async function buildAddressBalanceList({
   // 8. Write balances to storage.
   const sortedBalances = [...balances].sort((a, b) => a.wallet > b.wallet);
   await writers.writeBalances(sortedBalances);
+
   // 9. Done.
   printProcessEnd(logger, config);
 }

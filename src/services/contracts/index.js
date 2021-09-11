@@ -10,8 +10,6 @@ function getTokenContract(abi, tokenAddress, web3, defaultBlock, transactionConf
     return tokenContract;
 }
 
-
-
 async function collectTokenTransactors(config, logger, getContract, processor) {
     const blockEnd = Math.max(config.blockStart + 1, config.blockStop);
     const data = Array.from(
@@ -19,7 +17,6 @@ async function collectTokenTransactors(config, logger, getContract, processor) {
         (_, index) => index + config.blockStart
     );
     const blockQueues = splitBlockSequenceIntoQueues(data, config.numberOfQueues);
-    const accountSet = config.addressList;
     // processed blocks will be a list of Set, with each Set being account addresses
     const processedBlocks = await Promise.all(
         config.clients.map((web3Client, index) => {

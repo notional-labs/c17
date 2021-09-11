@@ -6,8 +6,6 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node src/index.js",
-    "scan": "node src/services/staking_collection.js",
-    "scanerr": "node src/services/staking_collection_err.js",
     "clean": "rm *.csv",
     "purdy": "./node_modules/prettier/bin-prettier.js --check src/**/*.js --write"
   },
